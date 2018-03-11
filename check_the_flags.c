@@ -323,8 +323,8 @@ void		more_spec(t_p *p)
 	temp = p->spec;
 	if (!(p->spec = (char*)ft_memalloc(sizeof(char) * ((p->spec_size += 256) + 1))))
 		p->error = 1;
-	ft_memcpy(p->spec, temp, p->j + 1);
-	free(temp);
+	ft_memcpy(p->spec, temp, p->j);
+	ft_strdel(&temp);
 }
 
 void		check_the_flags(t_p *p)
@@ -370,7 +370,7 @@ void		check_the_flags(t_p *p)
 			p->width--;
 		}
 		ft_memcpy(p->buf + p->ret, p->without_spec + 1, (p->ret += ft_strlen(p->without_spec) - 1));
-		free(p->without_spec);
+		ft_strdel(&p->without_spec);
 		p->i += p->j - 1;
 	}
 }

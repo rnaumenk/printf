@@ -81,7 +81,7 @@ void	funct_for_s(t_p *p)
 			p->buf[p->ret++] = p->zero_on ? 48 : 32;
 			p->width--;
 		}
-		// free(p->temp_s);
+		ft_strdel(&p->temp_s);
 	}
 	else
 	{
@@ -106,8 +106,8 @@ void	funct_for_s(t_p *p)
 			p->buf[p->ret++] = 32;
 			p->precision++;
 		}
-		// if (p->cut)
-			// free(p->temp_s);
+		if (p->cut)
+			ft_strdel(&p->temp_s);
 	}
 }
 
@@ -198,7 +198,7 @@ void	funct_for_d(t_p *p)
 			p->precision++;
 		}
 	}
-	// free(p->temp_s);
+	ft_strdel(&p->temp_s);
 }
 
 void	funct_for_p(t_p *p)
@@ -235,7 +235,7 @@ void	funct_for_p(t_p *p)
 		p->buf[p->ret++] = 32;
 		p->precision++;
 	}
-	// free(p->temp_s);
+	ft_strdel(&p->temp_s);
 }
 
 int		check_the_width(t_p *p)
@@ -315,7 +315,7 @@ void	funct_for_ws(t_p *p)
 			p->buf[p->ret++] = p->zero_on ? 48 : 32;
 			p->width--;
 		}
-		// free(p->temp_s);
+		ft_strdel(&p->temp_s);
 		return ;
 	}
 	if (p->sharp_undef || p->minus_undef)
@@ -400,7 +400,7 @@ void	funct_for_u(t_p *p)
 			p->precision++;
 		}
 	}
-	// free(p->temp_s);
+	ft_strdel(&p->temp_s);
 }
 
 void	funct_for_o(t_p *p)
@@ -453,7 +453,7 @@ void	funct_for_o(t_p *p)
 			p->precision++;
 		}
 	}
-	// free(p->temp_s);
+	ft_strdel(&p->temp_s);
 }
 
 void	funct_for_x(t_p *p)
@@ -513,7 +513,7 @@ void	funct_for_x(t_p *p)
 			p->precision++;
 		}
 	}
-	// free(p->temp_s);
+	ft_strdel(&p->temp_s);
 }
 
 void	funct_for_big_x(t_p *p)
@@ -573,5 +573,5 @@ void	funct_for_big_x(t_p *p)
 			p->precision++;
 		}
 	}
-	// free(p->temp_s);
+	ft_strdel(&p->temp_s);
 }
