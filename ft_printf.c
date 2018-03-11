@@ -76,7 +76,7 @@ int		ft_printf(const char *format, ...)
 			ft_strdel(&p->buf);
 			ft_strdel(&p->fmt);
 			ft_strdel(&p->spec);
-			// free(p);
+			free(p);
 			return (-1);
 		}
 		p->i++;
@@ -86,6 +86,6 @@ int		ft_printf(const char *format, ...)
 	ft_strdel(&p->buf);
 	ft_strdel(&p->fmt);
 	ft_strdel(&p->spec);
-	// free(p);
+	free(p);
 	return (p->ret);
 }
