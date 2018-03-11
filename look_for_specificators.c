@@ -28,12 +28,15 @@ void	look_for_specificators(t_p *p)
 	else if (p->spec[p->j] == '.')
 	{
 		p->j++;
+		if (p->prec_found && p->precision < 0)
+			p->width = ft_abs(p->precision);
 		p->precision = 0;
 		while (B(p->spec[p->j]) || (p->spec[p->j] >= 48 && p->spec[p->j] <= 57))
 		{
 			if (p->spec[p->j] == ' ')
 			{
 				p->j++;
+				look_for_specificators(p);
 				break ;
 			}
 			else if (p->spec[p->j] == '#')
@@ -43,14 +46,17 @@ void	look_for_specificators(t_p *p)
 			}
 			else if (p->spec[p->j] == '-')
 				look_for_specificators(p);
+			else if (p->spec[p->j] == '+')
+			{
+				look_for_specificators(p);
+				break ;
+			}
 			else if (p->spec[p->j] == 'l' && (A(p->spec[p->j + 1]) || p->spec[p->j + 1] == 'l'))
 				p->l_on++;
 			else if (p->spec[p->j] == 'h' && (A(p->spec[p->j + 1]) || p->spec[p->j + 1] == 'h'))
 				p->h_on++;
 			else if (p->spec[p->j] > 48 && p->spec[p->j] <= 57)
 			{
-				if (p->prec_found)
-					p->width = ft_abs(p->precision);
 				p->prec_found = 1;
 				p->precision = ft_atoi(p->spec + p->j);
 				while (p->spec[p->j] >= 48 && p->spec[p->j] <= 57)

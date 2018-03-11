@@ -181,15 +181,15 @@ void	funct_for_d(t_p *p)
 	else
 	{
 		check_the_buf(p, ft_strlen(p->temp_s) > (size_t)ft_abs(p->precision) ? ft_strlen(p->temp_s) : ft_abs(p->precision));
-		while (p->precision >= 0 && (p->precision - p->spaces - (p->minus_del ? 0 : p->plus_on) - (int)ft_strlen(p->temp_s)) > 0)
-		{
-			p->buf[p->ret++] = 48;
-			p->precision--;
-		}
 		if (p->plus_on && p->temp_s[0] != '-' && !p->zero_on)
 		{
 			check_the_buf(p, 1);
 			p->buf[p->ret++] = '+';
+		}
+		while (p->precision >= 0 && (p->precision - p->spaces - (int)ft_strlen(p->temp_s)) > 0)
+		{
+			p->buf[p->ret++] = 48;
+			p->precision--;
 		}
 		ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret += ft_strlen(p->temp_s)));
 		while (p->precision < 0 && p->prec_found && (ft_abs(p->precision) - p->spaces - (p->minus_del ? 1 : p->plus_on) - (int)ft_strlen(p->temp_s)) > 0)
@@ -330,6 +330,8 @@ void	funct_for_ws(t_p *p)
 			p->awd += p->wd;
 			p->precision -= p->wd;
 		}
+		else
+			break ;
 	}
 	(p->width - p->awd) < 0 ? (p->width = 0) : (p->width -= p->awd);
 	while (p->width && !p->minus_on)
@@ -417,7 +419,7 @@ void	funct_for_o(t_p *p)
 			p->buf[p->ret++] = p->zero_on ? 48 : 32;
 			p->width--;
 		}
-		if (p->sharp_on && p->temp_s[0] != 48)
+		if (p->sharp_on && ((p->prec_found && p->precision != 1) || (!p->prec_found && p->temp_s[0] != 48)))
 		{
 			check_the_buf(p, 1);
 			p->buf[p->ret++] = '0';
@@ -439,7 +441,7 @@ void	funct_for_o(t_p *p)
 			p->buf[p->ret++] = 48;
 			p->precision--;
 		}
-		if (p->sharp_on && p->temp_s[0] != 48)
+		if (p->sharp_on && ((p->prec_found && p->precision != 1) || (!p->prec_found && p->temp_s[0] != 48)))
 		{
 			check_the_buf(p, 1);
 			p->buf[p->ret++] = '0';
