@@ -106,7 +106,7 @@ void	funct_for_s(t_p *p)
 			p->buf[p->ret++] = 32;
 			p->precision++;
 		}
-		if (p->cut)
+		// if (p->cut)
 			// free(p->temp_s);
 	}
 }
