@@ -73,19 +73,19 @@ int		ft_printf(const char *format, ...)
 			p->buf[p->ret++] = p->fmt[p->i];
 		if (p->error == 1)
 		{
-			ft_strdel(&p->buf);
-			ft_strdel(&p->fmt);
-			ft_strdel(&p->spec);
-			free(p);
+			// ft_strdel(&p->buf);
+			// ft_strdel(&p->fmt);
+			// ft_strdel(&p->spec);
+			// free(p);
 			return (-1);
 		}
 		p->i++;
 	}
 	va_end(p->ap);
 	write(1, p->buf, p->ret);
-	ft_strdel(&p->buf);
-	ft_strdel(&p->fmt);
-	ft_strdel(&p->spec);
-	free(p);
+	// ft_strdel(&p->buf);
+	// ft_strdel(&p->fmt);
+	// ft_strdel(&p->spec);
+	// free(p);
 	return (p->ret);
 }
