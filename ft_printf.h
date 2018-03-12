@@ -88,13 +88,17 @@ void			funct_for_c(t_p *p);
 void			funct_for_wc(t_p *p);
 void			funct_for_ws(t_p *p);
 void			funct_for_u(t_p *p);
-void			funct_for_lu(t_p *p);
 void			funct_for_o(t_p *p);
-void			funct_for_lo(t_p *p);
-void			funct_for_ld(t_p *p);
 void			funct_for_x(t_p *p);
 void			funct_for_big_x(t_p *p);
-void			funct_for_lx(t_p *p);
-void			cut(t_p *p);
+void			prefunct_for_big_d(t_p *p);
+void			prefunct_for_d(t_p *p);
+void			prefunct_for_big_u(t_p *p);
+void			prefunct_for_u(t_p *p);
+void			prefunct_for_wc(t_p *p);
+void			prefunct_for_big_o(t_p *p);
+void			prefunct_for_o(t_p *p);
+void			prefunct_for_big_x(t_p *p);
+void			prefunct_for_x(t_p *p);
 
 #endif

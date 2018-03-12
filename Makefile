@@ -14,12 +14,20 @@ NAME = libftprintf.a
 LIB = libft/*.o
 CS = 	./check_the_buf.c \
 		./check_the_flags.c \
+		./check_the_width.c \
 		./ft_litoa_base.c \
 		./ft_printf.c \
 		./ft_ulxtoa_base.c \
-		./functs_for_flags.c \
+		./functs1.c \
+		./functs2.c \
+		./functs3.c \
+		./functs4.c \
+		./functs5.c \
 		./ft_uixtoa_base.c \
-		./look_for_specificators.c
+		./look_for_specificators.c \
+		./prefunct1.c \
+		./prefunct2.c \
+		./prefunct3.c
 OBJ = $(CS:.c=.o)
 
 all: $(NAME)
