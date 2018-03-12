@@ -51,7 +51,7 @@ int		ft_printf(const char *format, ...)
 	if (!(p = (t_p*)malloc(sizeof(t_p))))
 		return (-1);
 	if (!(p->buf = (char*)ft_memalloc(sizeof(char) *
-		((p->buf_size = 8192) + 1))))
+		((p->buf_size = 100000) + 1))))
 		return (-1);
 	if (!(p->spec = (char*)ft_memalloc(sizeof(char) * ((p->spec_size = 256) + 1))))
 		return (-1);
@@ -73,21 +73,19 @@ int		ft_printf(const char *format, ...)
 			p->buf[p->ret++] = p->fmt[p->i];
 		if (p->error == 1)
 		{
-			// ft_strdel(&p->buf);
-			// ft_strdel(&p->fmt);
-			// ft_strdel(&p->spec);
-			// free(p);
-			// p = NULL;
+			ft_strdel(&p->buf);
+			ft_strdel(&p->fmt);
+			ft_strdel(&p->spec);
+			free(p);
 			return (-1);
 		}
 		p->i++;
 	}
 	va_end(p->ap);
 	write(1, p->buf, p->ret);
-	// ft_strdel(&p->buf);
-	// ft_strdel(&p->fmt);
-	// ft_strdel(&p->spec);
-	// free(p);
-	// p = NULL;
+	ft_strdel(&p->buf);
+	ft_strdel(&p->fmt);
+	ft_strdel(&p->spec);
+	free(p);
 	return (p->ret);
 }
