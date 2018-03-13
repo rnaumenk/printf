@@ -10,45 +10,57 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
-LIB = libft/*.o
-CS = 	./check_the_buf.c \
-		./check_the_flags.c \
-		./check_the_width.c \
-		./ft_litoa_base.c \
-		./ft_printf.c \
-		./ft_ulxtoa_base.c \
-		./functs1.c \
-		./functs2.c \
-		./functs3.c \
-		./functs4.c \
-		./functs5.c \
-		./ft_uixtoa_base.c \
-		./look_for_specificators.c \
-		./prefunct1.c \
-		./prefunct2.c \
-		./prefunct3.c
-OBJ = $(CS:.c=.o)
+NAME	=	libftprintf.a
+SRC_DIR	=	./src/
+OBJ_DIR	=	./obj/
+INC_DIR	=	./include/
+SRC		= 	check_the_buf.c \
+			check_the_flags.c \
+			check_the_width.c \
+			ft_abs.c \
+			ft_atoi.c \
+			ft_bzero.c \
+			ft_itoa_base.c \
+			ft_litoa_base.c \
+			ft_memalloc.c \
+			ft_memcpy.c \
+			ft_printf.c \
+			ft_strdel.c \
+			ft_strdup.c \
+			ft_strlen.c \
+			ft_uixtoa_base.c \
+			ft_ulxtoa_base.c \
+			functs1.c \
+			functs2.c \
+			functs3.c \
+			functs4.c \
+			functs5.c \
+			functs6.c \
+			functs7.c \
+			look_for_specificators.c \
+			prefunct1.c \
+			prefunct2.c \
+			prefunct3.c
+OBJ		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(OBJ)
-	@ar rc $@ ./*.o ./libft/*.o
-	@echo "\033[32mlibftprintf.a is ready\033[0m"
+$(NAME): $(OBJ)
+	@ar rc $@ $^
+	@ranlib $@
+	@echo "\033[4;32mlibftprintf.a is ready\033[0m"
 
-$(LIB):
-	@cd libft && make && rm -f libft.a
-
-%.o: %.c
-	@gcc -Wall -Wextra -Werror -c $<
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
+	@gcc -Wall -Wextra -Werror -o $@ -c $<
 
 clean:
-	@rm -f $(OBJ)
-	@echo "\033[36mObjects and libft.a have been deleted\033[0m"
+	@rm -rf $(OBJ_DIR)
+	@echo "\033[3;33mObjects have been deleted\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[31mlibftprintf.a has been deleted\033[0m"
+	@echo "\033[3;31mlibftprintf.a has been deleted\033[0m"
 
 re: fclean all
 
