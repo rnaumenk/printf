@@ -25,6 +25,8 @@
 # include <sys/uio.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <inttypes.h>
+# include <stdint.h>
 
 # define A(x) x == 'c' || x == 'C' || x == 's' || x == 'S' || x == 'p' || x == 'd' || x == 'D' || x == 'i' || x == 'o' || x == 'O' || x == 'u' || x == 'U' || x == 'x' || x == 'X' || x == '%'
 # define B(x) x == '#' || x == '.' || x == '-' || x == '+' || x == 'l' || x == 'h' || x == 'j' || x == 'z' || x == ' ' || x == 39
