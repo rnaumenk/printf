@@ -34,6 +34,7 @@ static void		default_flags(t_p *p)
 	p->j_on = 0;
 	p->z_on = 0;
 	p->stop = 0;
+	p->dotnull = 0;
 }
 
 static void		default_values(t_p *p)

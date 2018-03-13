@@ -113,7 +113,11 @@ void			check_the_flags(t_p *p)
 		look_for_specificators(p);
 	p->j = 0;
 	if (p->found)
+	{
+		if (p->precision >= 0 && !(C(p->fmt[p->i])))
+			p->zero_on = 0;
 		check_the_flags2(p);
+	}
 	else
 		without_spec(p);
 }

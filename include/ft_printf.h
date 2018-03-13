@@ -30,6 +30,7 @@
 
 # define A(x) x == 'c' || x == 'C' || x == 's' || x == 'S' || x == 'p' || x == 'd' || x == 'D' || x == 'i' || x == 'o' || x == 'O' || x == 'u' || x == 'U' || x == 'x' || x == 'X' || x == '%'
 # define B(x) x == '#' || x == '.' || x == '-' || x == '+' || x == 'l' || x == 'h' || x == 'j' || x == 'z' || x == ' ' || x == 39
+# define C(x) x == 'C' || x == 'S' || x == 'c' || x == 's' || x == '%'
 
 typedef	struct	s_p
 {
@@ -78,6 +79,8 @@ typedef	struct	s_p
 	int					prec_found;
 	int					minus_del;
 	int					stop;
+	int					dotnull;
+
 }				t_p;
 
 int				ft_printf(const char *format, ...);

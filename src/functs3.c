@@ -28,7 +28,7 @@ static void		funct_for_d4(t_p *p)
 		check_the_buf(p, 1);
 		p->buf[p->ret++] = '+';
 	}
-	while (p->precision >= 0 && (p->precision - p->spaces -
+	while (p->precision >= 0 && (p->precision -
 		(int)ft_strlen(p->temp_s)) > 0)
 	{
 		p->buf[p->ret++] = 48;
@@ -94,12 +94,14 @@ void			funct_for_d(t_p *p)
 		p->zero_on = 0;
 	if (p->temp_s[0] == '-' && ((p->width && p->zero_on) || p->prec_found))
 		minus_del(p);
+	if (p->spaces && p->minus_del)	
+		p->spaces = 0;
 	if (p->plus_on && p->temp_s[0] != '-' && p->zero_on)
 	{
 		check_the_buf(p, 1);
 		p->buf[p->ret++] = '+';
 	}
-	if (p->spaces && p->temp_s[0] != '-')
+	if (p->spaces && !p->minus_del && p->temp_s[0] != '-')
 	{
 		check_the_buf(p, 1);
 		p->buf[p->ret++] = 32;

@@ -14,11 +14,10 @@
 
 static int		precision3(t_p *p)
 {
-	if (p->spec[p->j] == 'l' && (A(p->spec[p->j + 1]) ||
-		p->spec[p->j + 1] == 'l'))
+	if (p->spec[p->j] == 'l' && (B(p->spec[p->j + 1]) || !p->spec[p->j + 1]))
 		p->l_on++;
-	else if (p->spec[p->j] == 'h' && (A(p->spec[p->j + 1]) ||
-		p->spec[p->j + 1] == 'h'))
+	else if (p->spec[p->j] == 'h' && (B(p->spec[p->j + 1]) ||
+		!p->spec[p->j + 1]))
 		p->h_on++;
 	else if (p->spec[p->j] > 48 && p->spec[p->j] <= 57)
 	{

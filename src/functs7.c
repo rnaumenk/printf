@@ -79,6 +79,8 @@ void			funct_for_x(t_p *p)
 		p->zero_on = 0;
 	if (p->temp_s[0] == 48 && !p->precision)
 		p->temp_s[0] = 0;
+	if (p->sharp_on && p->temp_s[0] == 48 && p->width)
+		p->width += 2;
 	if (p->width >= ft_abs(p->precision))
 		funct_for_x2(p);
 	else

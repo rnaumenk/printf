@@ -10,7 +10,7 @@ static void		funct_for_o4(t_p *p)
 		p->buf[p->ret++] = 48;
 		p->precision--;
 	}
-	if (p->sharp_on && ((p->prec_found && p->precision != 1) ||
+	if (p->sharp_on && ((p->prec_found && !p->dotnull) ||
 		(!p->prec_found && p->temp_s[0] != 48)))
 	{
 		check_the_buf(p, 1);
@@ -29,7 +29,7 @@ static void		funct_for_o4(t_p *p)
 static void		funct_for_o3(t_p *p)
 {
 	while (p->minus_on && (p->width - (ft_abs(p->precision) >
-		(int)ft_strlen(p->temp_s) ? 0 : p->sharp_on) -
+		(int)ft_strlen(p->temp_s) ? 0 : (p->temp_s[0] == 48 ? 0 : p->sharp_on)) -
 		(ft_abs(p->precision) > (int)ft_strlen(p->temp_s) ?
 		(ft_abs(p->precision) - (int)ft_strlen(p->temp_s)) : 0) -
 		(int)ft_strlen(p->temp_s)) > 0)
@@ -44,7 +44,7 @@ static void		funct_for_o2(t_p *p)
 	check_the_buf(p, ft_strlen(p->temp_s) > (size_t)p->width ?
 		ft_strlen(p->temp_s) : p->width);
 	while (!p->minus_on && (p->width - (ft_abs(p->precision) >
-		(int)ft_strlen(p->temp_s) ? 0 : p->sharp_on) -
+		(int)ft_strlen(p->temp_s) ? 0 : (p->temp_s[0] == 48 ? 0 : p->sharp_on)) -
 		(ft_abs(p->precision) > (int)ft_strlen(p->temp_s) ?
 		(ft_abs(p->precision) - (int)ft_strlen(p->temp_s)) : 0) -
 		(int)ft_strlen(p->temp_s)) > 0)
@@ -52,7 +52,7 @@ static void		funct_for_o2(t_p *p)
 		p->buf[p->ret++] = p->zero_on ? 48 : 32;
 		p->width--;
 	}
-	if (p->sharp_on && ((p->prec_found && p->precision != 1) ||
+	if (p->sharp_on && ((p->prec_found && !p->dotnull) ||
 		(!p->prec_found && p->temp_s[0] != 48)))
 	{
 		check_the_buf(p, 1);
@@ -74,6 +74,8 @@ void			funct_for_o(t_p *p)
 		p->zero_on = 0;
 	if (p->temp_s[0] == 48 && !p->precision)
 		p->temp_s[0] = 0;
+	if (p->temp_s[0] == 48 && p->precision == 1)
+		p->dotnull = 1;
 	if (p->width >= ft_abs(p->precision))
 		funct_for_o2(p);
 	else
