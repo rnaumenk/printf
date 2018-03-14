@@ -61,7 +61,7 @@ static void			more_spec(t_p *p)
 		((p->spec_size += 10) + 1))))
 		p->error = 1;
 	ft_memcpy(p->spec, temp, p->j);
-	ft_strdel(&temp);
+	// ft_strdel(&temp);
 }
 
 static void		without_spec(t_p *p)
@@ -90,7 +90,7 @@ static void		without_spec(t_p *p)
 	}
 	ft_memcpy(p->buf + p->ret, p->without_spec + 1, (p->ret +=
 		ft_strlen(p->without_spec) - 1));
-	ft_strdel(&p->without_spec);
+	// ft_strdel(&p->without_spec);
 	p->i += p->j - 1;
 }
 

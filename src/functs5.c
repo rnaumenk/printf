@@ -54,5 +54,5 @@ void			funct_for_u(t_p *p)
 		funct_for_u2(p);
 	else
 		funct_for_u3(p);
-	ft_strdel(&p->temp_s);
+	// ft_strdel(&p->temp_s);
 }

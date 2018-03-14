@@ -112,5 +112,5 @@ void			funct_for_d(t_p *p)
 		funct_for_d2(p);
 	else
 		funct_for_d4(p);
-	ft_strdel(&p->temp_s);
+	// ft_strdel(&p->temp_s);
 }

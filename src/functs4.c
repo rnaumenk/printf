@@ -46,7 +46,7 @@ static void		funct_for_ws2(t_p *p)
 		p->buf[p->ret++] = p->zero_on ? 48 : 32;
 		p->width--;
 	}
-	ft_strdel(&p->temp_s);
+	// ft_strdel(&p->temp_s);
 }
 
 void			funct_for_ws(t_p *p)

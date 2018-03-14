@@ -45,7 +45,6 @@ char			*ft_ulxtoa_base(uintmax_t value, int base)
 		return (0);
 	len = 0;
 	len = base_count(value, base, len);
-	// if (!(res = (char*)ft_memalloc(sizeof(char) * (len + 1))))
 	if (!(res = (char*)malloc(sizeof(char) * (len + 1))))
 		return (0);
 	res[0] = 0;
