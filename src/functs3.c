@@ -62,11 +62,11 @@ static void		funct_for_d3(t_p *p)
 
 static void		funct_for_d2(t_p *p)
 {
-	check_the_buf(p, ft_strlen(p->temp_s) > (size_t)p->width ?
-		ft_strlen(p->temp_s) : p->width);
+	check_the_buf(p, ft_strlen(p->temp_s) > ((size_t)p->width - p->spaces + p->minus_del) ?
+		ft_strlen(p->temp_s) : (p->width - p->spaces + p->kostyl));
 	while (!p->minus_on && (p->width - (ft_abs(p->precision) >
 		(int)ft_strlen(p->temp_s) ? (ft_abs(p->precision) -
-		(int)ft_strlen(p->temp_s)) : 0) - p->spaces -
+		(int)ft_strlen(p->temp_s)) : 0) - (p->prec_found || p->temp_s[0] == 48 ? p->spaces : 0) -
 		(p->temp_s[0] == '-' ? 0 : p->plus_on) -
 		(int)ft_strlen(p->temp_s)) > 0)
 	{
@@ -92,6 +92,8 @@ void			funct_for_d(t_p *p)
 		p->width = 0;
 	if (p->prec_found)
 		p->zero_on = 0;
+	if (p->temp_s[0] == '-')
+		p->kostyl = 1;
 	if (p->temp_s[0] == '-' && ((p->width && p->zero_on) || p->prec_found))
 		minus_del(p);
 	if (p->spaces && p->minus_del)	
@@ -112,5 +114,5 @@ void			funct_for_d(t_p *p)
 		funct_for_d2(p);
 	else
 		funct_for_d4(p);
-	// ft_strdel(&p->temp_s);
+	ft_strdel(&p->temp_s);
 }

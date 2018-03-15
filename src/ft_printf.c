@@ -35,6 +35,7 @@ static void		default_flags(t_p *p)
 	p->z_on = 0;
 	p->stop = 0;
 	p->dotnull = 0;
+	p->kostyl = 0;
 }
 
 static void		default_values(t_p *p)
@@ -69,11 +70,14 @@ static void		move(t_p *p)
 			return ;
 		p->i++;
 	}
+	// printf("%zu\n", p->buf_size - 1);
+
 }
 
 int				ft_printf(const char *format, ...)
 {
 	t_p			*p;
+	int			i;
 
 	if (!(p = (t_p*)malloc(sizeof(t_p))))
 		return (-1);
@@ -93,6 +97,7 @@ int				ft_printf(const char *format, ...)
 	va_end(p->ap);
 	if (!p->error)
 		write(1, p->buf, p->ret);
+	i = (p->error ? -1 : p->ret);
 	// leaks_delete(p);
-	return (p->error ? -1 : p->ret);
+	return (i);
 }

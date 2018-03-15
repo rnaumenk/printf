@@ -80,6 +80,7 @@ typedef	struct	s_p
 	int					minus_del;
 	int					stop;
 	int					dotnull;
+	int					kostyl;
 
 }				t_p;
 

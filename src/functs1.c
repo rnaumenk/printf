@@ -14,6 +14,8 @@
 
 void			funct_for_percent(t_p *p)
 {
+	if (p->precision < 0 && p->prec_found)
+		p->width = ft_abs(p->precision);
 	check_the_buf(p, (1 > p->width ? 1 : p->width));
 	while ((p->width - 1) > 0 && !p->minus_on)
 	{
@@ -31,6 +33,8 @@ void			funct_for_percent(t_p *p)
 void			funct_for_c(t_p *p)
 {
 	p->temp_c = va_arg(p->ap, int);
+	if (p->precision < 0 && p->prec_found)
+		p->width = ft_abs(p->precision);
 	check_the_buf(p, (1 > p->width ? 1 : p->width));
 	while ((p->width - 1) > 0 && !p->minus_on)
 	{
@@ -63,7 +67,7 @@ static void		funct_for_p2(t_p *p)
 		p->buf[p->ret++] = 32;
 		p->precision++;
 	}
-	// ft_strdel(&p->temp_s);
+	ft_strdel(&p->temp_s);
 }
 
 void			funct_for_p(t_p *p)
@@ -74,8 +78,19 @@ void			funct_for_p(t_p *p)
 		p->width = 0;
 	if (p->temp_s[0] == 48 && !p->precision)
 		p->temp_s[0] = 0;
-	check_the_buf(p, (ft_strlen(p->temp_s) + 2 > (size_t)p->width ?
-		(ft_strlen(p->temp_s) + 2) : p->width));
+	if (p->precision < 0 && p->prec_found)
+	{
+		p->width = ft_abs(p->precision);
+		p->precision = 0;
+	}
+	if (p->width >= ft_abs(p->precision))
+	{
+		check_the_buf(p, (ft_strlen(p->temp_s) + 2 > (size_t)p->width ?
+			(ft_strlen(p->temp_s) + 2) : (p->width + 2)));
+	}
+	else
+		check_the_buf(p, (ft_strlen(p->temp_s) + 2 > (size_t)ft_abs(p->precision) ?
+			(ft_strlen(p->temp_s) + 2) : (ft_abs(p->precision) + 2)));
 	while ((p->width - (p->precision > (int)ft_strlen(p->temp_s) ?
 		(p->precision - (int)ft_strlen(p->temp_s)) : 0) -
 		(int)ft_strlen(p->temp_s) - 2) > 0 && !p->minus_on && !p->zero_on)
