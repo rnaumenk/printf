@@ -16,10 +16,10 @@ size_t		check_the_buf(t_p *p, size_t len)
 {
 	char	*temp;
 
-	if ((p->ret + len) > p->buf_size)
+	if ((p->ret + len) >= p->buf_size)
 	{
 		temp = p->buf;
-		while ((p->ret + len) > p->buf_size)
+		while ((p->ret + len) >= p->buf_size)
 			p->buf_size += 100000;
 		if (!(p->buf = (char*)ft_memalloc(sizeof(char) * (p->buf_size + 1))))
 			p->error = 1;

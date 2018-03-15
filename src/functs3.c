@@ -66,7 +66,7 @@ static void		funct_for_d2(t_p *p)
 		ft_strlen(p->temp_s) : (p->width - p->spaces + p->kostyl));
 	while (!p->minus_on && (p->width - (ft_abs(p->precision) >
 		(int)ft_strlen(p->temp_s) ? (ft_abs(p->precision) -
-		(int)ft_strlen(p->temp_s)) : 0) - (p->prec_found || p->temp_s[0] == 48 ? p->spaces : 0) -
+		(int)ft_strlen(p->temp_s)) : 0) - (p->prec_found || !p->precision || p->temp_s[0] == 48 ? p->spaces : 0) -
 		(p->temp_s[0] == '-' ? 0 : p->plus_on) -
 		(int)ft_strlen(p->temp_s)) > 0)
 	{
