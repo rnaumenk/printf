@@ -38,8 +38,8 @@ static void		funct_for_s2(t_p *p)
 		p->buf[p->ret++] = 32;
 		p->precision++;
 	}
-	// if (p->cut)
-	// 	ft_strdel(&p->temp_s);
+	if (p->cut)
+		ft_strdel(&p->temp_s);
 }
 
 void			funct_for_s(t_p *p)
@@ -68,7 +68,7 @@ void			funct_for_s(t_p *p)
 			p->buf[p->ret++] = p->zero_on ? 48 : 32;
 			p->width--;
 		}
-		// ft_strdel(&p->temp_s);
+		ft_strdel(&p->temp_s);
 	}
 	else
 		funct_for_s2(p);

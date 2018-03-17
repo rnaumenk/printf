@@ -87,5 +87,5 @@ void			funct_for_x(t_p *p)
 		funct_for_x2(p);
 	else
 		funct_for_x4(p);
-	// ft_strdel(&p->temp_s);
+	ft_strdel(&p->temp_s);
 }

@@ -67,7 +67,7 @@ static void		funct_for_p2(t_p *p)
 		p->buf[p->ret++] = 32;
 		p->precision++;
 	}
-	// ft_strdel(&p->temp_s);
+	ft_strdel(&p->temp_s);
 }
 
 void			funct_for_p(t_p *p)
