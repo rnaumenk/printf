@@ -35,7 +35,10 @@ static void		default_flags(t_p *p)
 	p->z_on = 0;
 	p->stop = 0;
 	p->dotnull = 0;
-	p->kostyl = 0;
+	p->kostyl1 = 0;
+	p->kostyl2 = 0;
+	p->kostyl3 = 0;
+	p->kostyl4 = 0;
 }
 
 static void		default_values(t_p *p)
@@ -51,7 +54,7 @@ static void		default_values(t_p *p)
 	// ft_strdel(&p->buf);
 	// ft_strdel(&p->fmt);
 	// ft_strdel(&p->spec);
-	// free(p);
+// 	free(p);
 // }
 
 static void		move(t_p *p)
@@ -70,9 +73,12 @@ static void		move(t_p *p)
 			return ;
 		p->i++;
 	}
-	// printf("%zu\n", p->buf_size - 1);
-
+	// printf("%zu\n", p->buf_size -1);
 }
+
+// УДАЛИ МЄЛКІ ЧЕКБАФИ
+// ft_strlen(temp_s) - make a variable!!!
+// пройдись по функціям ще раз з БАФ_САЙЗ = 1
 
 int				ft_printf(const char *format, ...)
 {
@@ -82,7 +88,7 @@ int				ft_printf(const char *format, ...)
 	if (!(p = (t_p*)malloc(sizeof(t_p))))
 		return (-1);
 	if (!(p->buf = (char*)ft_memalloc(sizeof(char) *
-		((p->buf_size = 100000) + 1))))
+		((p->buf_size = 10000) + 1))))
 		return (-1);
 	if (!(p->spec = (char*)ft_memalloc(sizeof(char) *
 		((p->spec_size = 20) + 1))))
@@ -100,4 +106,5 @@ int				ft_printf(const char *format, ...)
 	i = (p->error ? -1 : p->ret);
 	// leaks_delete(p);
 	return (i);
+	// return (p->error ? -1 : p->buf_size - 1);
 }

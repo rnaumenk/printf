@@ -61,7 +61,7 @@ static void			more_spec(t_p *p)
 		((p->spec_size += 10) + 1))))
 		p->error = 1;
 	ft_memcpy(p->spec, temp, p->j);
-	ft_strdel(&temp);
+	// ft_strdel(&temp);
 }
 
 static void		without_spec(t_p *p)
@@ -77,7 +77,7 @@ static void		without_spec(t_p *p)
 		p->error = 1;
 	// p->i -= p->j;
 	ft_memcpy(p->without_spec, p->fmt + (p->i -= p->j), (size_t)p->j);
-	check_the_buf(p, ft_strlen(p->without_spec) + p->width - (p->width > 0 ? 1 : 0));
+	check_the_buf(p, (p->len = ft_strlen(p->without_spec)) + p->width - (p->width > 0 ? 1 : 0));
 	while ((p->width - 1) > 0 && !p->minus_on)
 	{
 		p->buf[p->ret++] = p->zero_on ? 48 : 32;
@@ -90,8 +90,8 @@ static void		without_spec(t_p *p)
 		p->width--;
 	}
 	ft_memcpy(p->buf + p->ret, p->without_spec + 1, (p->ret +=
-		ft_strlen(p->without_spec) - 1));
-	ft_strdel(&p->without_spec);
+		p->len - 1));
+	// ft_strdel(&p->without_spec);
 	p->i += p->j - 1;
 }
 

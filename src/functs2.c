@@ -20,15 +20,15 @@ static void		funct_for_s2(t_p *p)
 		p->temp_s = "";
 	if (p->precision >= 0 && ft_strlen(p->temp_s) > (size_t)p->precision)
 		cut(p);
-	check_the_buf(p, ft_strlen(p->temp_s) > (size_t)p->width ?
-		ft_strlen(p->temp_s) : p->width);
-	while ((p->width - (int)ft_strlen(p->temp_s)) > 0 && !p->minus_on)
+	check_the_buf(p, (p->len = ft_strlen(p->temp_s)) > (size_t)p->width ?
+		p->len : p->width);
+	while ((p->width - (int)p->len) > 0 && !p->minus_on)
 	{
 		p->buf[p->ret++] = p->zero_on ? 48 : 32;
 		p->width--;
 	}
-	ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret += ft_strlen(p->temp_s)));
-	while ((p->width - (int)ft_strlen(p->temp_s)) > 0 && p->minus_on)
+	ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret += p->len));
+	while ((p->width - (int)p->len) > 0 && p->minus_on)
 	{
 		p->buf[p->ret++] = p->zero_on ? 48 : 32;
 		p->width--;
@@ -38,8 +38,8 @@ static void		funct_for_s2(t_p *p)
 		p->buf[p->ret++] = 32;
 		p->precision++;
 	}
-	if (p->cut)
-		ft_strdel(&p->temp_s);
+	// if (p->cut)
+	// 	ft_strdel(&p->temp_s);
 }
 
 void			funct_for_s(t_p *p)
@@ -53,22 +53,22 @@ void			funct_for_s(t_p *p)
 	if (!p->temp_s)
 	{
 		p->temp_s = ft_strdup("(null)");
-		if (p->precision >= 0 && ft_strlen(p->temp_s) > (size_t)p->precision)
+		if (p->precision >= 0 && 6 > (size_t)p->precision)
 			p->temp_s[p->precision] = 0;
-		check_the_buf(p, ft_strlen(p->temp_s) > (size_t)p->width ?
-			ft_strlen(p->temp_s) : p->width);
-		while ((p->width - (int)ft_strlen(p->temp_s)) > 0 && !p->minus_on)
+		check_the_buf(p, (p->len = ft_strlen(p->temp_s)) > (size_t)p->width ?
+			p->len : p->width);
+		while ((p->width - (int)p->len) > 0 && !p->minus_on)
 		{
 			p->buf[p->ret++] = p->zero_on ? 48 : 32;
 			p->width--;
 		}
-		ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret += ft_strlen(p->temp_s)));
-		while ((p->width - (int)ft_strlen(p->temp_s)) > 0 && p->minus_on)
+		ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret += p->len));
+		while ((p->width - (int)p->len) > 0 && p->minus_on)
 		{
 			p->buf[p->ret++] = p->zero_on ? 48 : 32;
 			p->width--;
 		}
-		ft_strdel(&p->temp_s);
+		// ft_strdel(&p->temp_s);
 	}
 	else
 		funct_for_s2(p);

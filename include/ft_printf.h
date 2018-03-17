@@ -80,8 +80,11 @@ typedef	struct	s_p
 	int					minus_del;
 	int					stop;
 	int					dotnull;
-	int					kostyl;
-
+	int					kostyl1;
+	int					kostyl2;
+	int					kostyl3;
+	int					kostyl4;
+	size_t				len;
 }				t_p;
 
 int				ft_printf(const char *format, ...);
