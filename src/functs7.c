@@ -16,8 +16,8 @@ static void		funct_for_x4(t_p *p)
 		p->buf[p->ret++] = 48;
 		p->precision--;
 	}
-	ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret +=
-		p->len));
+	ft_memcpy(p->buf + p->ret, p->temp_s, p->len);
+	p->ret += p->len;
 	while (p->precision < 0 && p->prec_found && (ft_abs(p->precision) -
 		2 * p->sharp_on - (int)p->len) > 0)
 	{
@@ -30,8 +30,8 @@ static void		funct_for_x3(t_p *p)
 {
 	while ((p->precision - (int)p->len - p->j++) > 0)
 		p->buf[p->ret++] = 48;
-	ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret +=
-		p->len));
+	ft_memcpy(p->buf + p->ret, p->temp_s, p->len);
+	p->ret += p->len;
 	while (p->minus_on && (p->width - 2 * p->sharp_on -
 		(ft_abs(p->precision) > (int)p->len ?
 		(ft_abs(p->precision) - (int)p->len) : 0) -

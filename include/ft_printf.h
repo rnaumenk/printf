@@ -41,6 +41,7 @@ typedef	struct	s_p
 	char				*fmt;
 	char				*spec;
 	char				*without_spec;
+	char				*tmp;
 	size_t				buf_size;
 	size_t				spec_size;
 	size_t				ret;

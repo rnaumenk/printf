@@ -49,13 +49,12 @@ static void		default_values(t_p *p)
 	p->sl_on = 0;
 }
 
-// static void		leaks_delete(t_p *p)
-// {
-	// ft_strdel(&p->buf);
-	// ft_strdel(&p->fmt);
-	// ft_strdel(&p->spec);
-// 	free(p);
-// }
+static void		leaks_delete(t_p *p)
+{
+	ft_strdel(&p->buf);
+	ft_strdel(&p->fmt);
+	ft_strdel(&p->spec);
+}
 
 static void		move(t_p *p)
 {
@@ -68,43 +67,43 @@ static void		move(t_p *p)
 			ft_bzero(p->spec, p->spec_size);
 		}
 		else if (p->fmt[p->i] != '%' && check_the_buf(p, 1))
+		{
+
 			p->buf[p->ret++] = p->fmt[p->i];
+
+		}
 		if (p->error == 1)
 			return ;
 		p->i++;
 	}
-	// printf("%zu\n", p->buf_size -1);
+	// printf("%zu\n", p->buf_size);
 }
-
-// УДАЛИ МЄЛКІ ЧЕКБАФИ
-// ft_strlen(temp_s) - make a variable!!!
-// пройдись по функціям ще раз з БАФ_САЙЗ = 1
 
 int				ft_printf(const char *format, ...)
 {
-	t_p			*p;
+	t_p			p;
 	int			i;
 
-	if (!(p = (t_p*)malloc(sizeof(t_p))))
+	// if (!(p = (t_p*)malloc(sizeof(t_p))))
+	// 	return (-1);
+	if (!(p.buf = (char*)ft_memalloc(sizeof(char) *
+		((p.buf_size = 100) + 1))))
 		return (-1);
-	if (!(p->buf = (char*)ft_memalloc(sizeof(char) *
-		((p->buf_size = 1) + 1))))
+	if (!(p.spec = (char*)ft_memalloc(sizeof(char) *
+		((p.spec_size = 20) + 1))))
 		return (-1);
-	if (!(p->spec = (char*)ft_memalloc(sizeof(char) *
-		((p->spec_size = 20) + 1))))
+	if (!(p.fmt = (char*)ft_memalloc(sizeof(char) *
+		((p.fmt_len = ft_strlen(format)) + 1))))
 		return (-1);
-	if (!(p->fmt = (char*)ft_memalloc(sizeof(char) *
-		((p->fmt_len = ft_strlen(format)) + 1))))
-		return (-1);
-	ft_memcpy(p->fmt, format, p->fmt_len);
-	default_values(p);
-	va_start(p->ap, format);
-	move(p);
-	va_end(p->ap);
-	if (!p->error)
-		write(1, p->buf, p->ret);
-	i = (p->error ? -1 : p->ret);
-	// leaks_delete(p);
+	ft_memcpy(p.fmt, format, p.fmt_len);
+	default_values(&p);
+	va_start(p.ap, format);
+	move(&p);
+	va_end(p.ap);
+	if (!p.error)
+		write(1, p.buf, p.ret);
+	i = (p.error ? -1 : (int)p.ret);
+	leaks_delete(&p);
 	return (i);
-	// return (p->error ? -1 : p->buf_size - 1);
+	// return (p.error ? -1 : p.buf_size - 1);
 }

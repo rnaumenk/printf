@@ -53,7 +53,8 @@ static void		funct_for_p2(t_p *p)
 {
 	while ((p->precision - (int)p->len - p->j++) > 0)
 			p->buf[p->ret++] = 48;
-	ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret += p->len));
+	ft_memcpy(p->buf + p->ret, p->temp_s, p->len);
+	p->ret += p->len;
 	while ((p->width - (p->precision > (int)p->len ?
 		(p->precision - (int)p->len) : 0) -
 		(int)p->len - 2) > 0 && p->minus_on)

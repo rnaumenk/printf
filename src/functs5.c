@@ -10,7 +10,8 @@ static void		funct_for_u3(t_p *p)
 		p->buf[p->ret++] = 48;
 		p->precision--;
 	}
-	ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret += p->len));
+	ft_memcpy(p->buf + p->ret, p->temp_s, p->len);
+	p->ret += p->len;
 	while (p->precision < 0 && p->prec_found && (ft_abs(p->precision) -
 		(int)p->len) > 0)
 	{
@@ -32,7 +33,8 @@ static void		funct_for_u2(t_p *p)
 	}
 	while ((p->precision - (int)p->len - p->j++) > 0)
 		p->buf[p->ret++] = 48;
-	ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret += p->len));
+	ft_memcpy(p->buf + p->ret, p->temp_s, p->len);
+	p->ret += p->len;
 	while (p->minus_on && (p->width - (ft_abs(p->precision) >
 		(int)p->len ? (ft_abs(p->precision) -
 			(int)p->len) : 0) - (int)p->len) > 0)

@@ -103,7 +103,7 @@ void			prefunct_for_wc(t_p *p)
 {
 	p->temp_wc = va_arg(p->ap, wint_t);
 	if (p->prec_found && p->precision < 0)
-		p->width = 0;
+		p->width = ft_abs(p->precision);
 	p->awd = check_the_width(p);
 	(p->width - p->awd) < 0 ? (p->width = 0) : (p->width -= p->awd);
 	while (p->width && !p->minus_on)

@@ -27,7 +27,8 @@ static void		funct_for_s2(t_p *p)
 		p->buf[p->ret++] = p->zero_on ? 48 : 32;
 		p->width--;
 	}
-	ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret += p->len));
+	ft_memcpy(p->buf + p->ret, p->temp_s, p->len);
+	p->ret += p->len;
 	while ((p->width - (int)p->len) > 0 && p->minus_on)
 	{
 		p->buf[p->ret++] = p->zero_on ? 48 : 32;
@@ -62,7 +63,8 @@ void			funct_for_s(t_p *p)
 			p->buf[p->ret++] = p->zero_on ? 48 : 32;
 			p->width--;
 		}
-		ft_memcpy(p->buf + p->ret, p->temp_s, (p->ret += p->len));
+		ft_memcpy(p->buf + p->ret, p->temp_s, p->len);
+		p->ret += p->len;
 		while ((p->width - (int)p->len) > 0 && p->minus_on)
 		{
 			p->buf[p->ret++] = p->zero_on ? 48 : 32;
