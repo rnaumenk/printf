@@ -83,7 +83,7 @@ int				ft_printf(const char *format, ...)
 	// if (!(p = (t_p*)malloc(sizeof(t_p))))
 	// 	return (-1);
 	if (!(p.buf = (char*)ft_memalloc(sizeof(char) *
-		((p.buf_size = 100) + 1))))
+		((p.buf_size = 1) + 1))))
 		return (-1);
 	if (!(p.spec = (char*)ft_memalloc(sizeof(char) *
 		((p.spec_size = 20) + 1))))
