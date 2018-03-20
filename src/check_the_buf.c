@@ -18,13 +18,13 @@ size_t		check_the_buf(t_p *p, size_t len)
 	{
 		p->tmp = p->buf;
 		while ((p->ret + len) > p->buf_size)
-			p->buf_size += 1;
+			p->buf_size += 50;
 		if (!(p->buf = (char*)ft_memalloc(sizeof(char) * (p->buf_size + 1))))
 			p->error = 1;
 		if (!p->error && &p->buf != &p->tmp)
 		{
 			ft_memcpy(p->buf, p->tmp, p->ret);
-			// ft_strdel(&p->tmp);
+			ft_strdel(&p->tmp);
 		}
 	}
 	return (len);

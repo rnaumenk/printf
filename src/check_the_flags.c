@@ -89,8 +89,8 @@ static void		without_spec(t_p *p)
 		p->buf[p->ret++] = p->zero_on ? 48 : 32;
 		p->width--;
 	}
-	ft_memcpy(p->buf + p->ret, p->without_spec + 1, (p->ret +=
-		p->len - 1));
+	ft_memcpy(p->buf + p->ret, p->without_spec + 1, p->len - 1);
+	p->ret += p->len - 1;
 	ft_strdel(&p->without_spec);
 	p->i += p->j - 1;
 }

@@ -49,12 +49,12 @@ static void		default_values(t_p *p)
 	p->sl_on = 0;
 }
 
-// static void		leaks_delete(t_p *p)
-// {
-// 	ft_strdel(&p->buf);
-// 	ft_strdel(&p->fmt);
-// 	ft_strdel(&p->spec);
-// }
+static void		leaks_delete(t_p *p)
+{
+	ft_strdel(&p->buf);
+	ft_strdel(&p->fmt);
+	ft_strdel(&p->spec);
+}
 
 static void		move(t_p *p)
 {
@@ -83,7 +83,7 @@ int				ft_printf(const char *format, ...)
 	// if (!(p = (t_p*)malloc(sizeof(t_p))))
 	// 	return (-1);
 	if (!(p.buf = (char*)ft_memalloc(sizeof(char) *
-		((p.buf_size = 1) + 1))))
+		((p.buf_size = 100) + 1))))
 		return (-1);
 	if (!(p.spec = (char*)ft_memalloc(sizeof(char) *
 		((p.spec_size = 20) + 1))))
@@ -99,7 +99,7 @@ int				ft_printf(const char *format, ...)
 	if (!p.error)
 		write(1, p.buf, p.ret);
 	i = (p.error ? -1 : (int)p.ret);
-	// leaks_delete(&p);
+	leaks_delete(&p);
 	return (i);
 	// return (p.error ? -1 : p.buf_size - 1);
 }
