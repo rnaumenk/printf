@@ -14,10 +14,11 @@
 
 static int		precision3(t_p *p)
 {
-	if (p->spec[p->j] == 'l' && (B(p->spec[p->j + 1]) || !p->spec[p->j + 1]))
+	if (p->spec[p->j] == 'l' && (B(p->spec[p->j + 1]) || B1(p->spec[p->j + 1])
+		|| !p->spec[p->j + 1]))
 		p->l_on++;
 	else if (p->spec[p->j] == 'h' && (B(p->spec[p->j + 1]) ||
-		!p->spec[p->j + 1]))
+		B1(p->spec[p->j + 1]) || !p->spec[p->j + 1]))
 		p->h_on++;
 	else if (p->spec[p->j] > 48 && p->spec[p->j] <= 57)
 	{
@@ -33,7 +34,7 @@ static int		precision3(t_p *p)
 
 static int		precision2(t_p *p)
 {
-	while (B(p->spec[p->j]) || (p->spec[p->j] >= 48 && p->spec[p->j] <= 57))
+	while (B(p->spec[p->j]) || B1(p->spec[p->j]) || D(p->spec[p->j]))
 	{
 		if (p->spec[p->j] == ' ')
 		{
@@ -94,7 +95,7 @@ static void		next(t_p *p)
 	}
 }
 
-void	look_for_specificators(t_p *p)
+void			look_for_specificators(t_p *p)
 {
 	if (p->spec[p->j] == 32 && !p->plus_on)
 		p->spaces = 1;

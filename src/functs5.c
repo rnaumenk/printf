@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   functs5.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rnaumenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/21 16:07:01 by rnaumenk          #+#    #+#             */
+/*   Updated: 2018/03/21 16:07:02 by rnaumenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ft_printf.h"
 
 static void		funct_for_u3(t_p *p)
 {
-	check_the_buf(p, (p->len = ft_strlen(p->temp_s)) > (size_t)ft_abs(p->precision) ?
-		p->len : ft_abs(p->precision));
+	check_the_buf(p, (p->len = ft_strlen(p->temp_s)) >
+		(size_t)ft_abs(p->precision) ? p->len : ft_abs(p->precision));
 	while (p->precision >= 0 && (p->precision -
 		(int)p->len) > 0)
 	{

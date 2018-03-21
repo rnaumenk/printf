@@ -51,13 +51,19 @@ void			funct_for_c(t_p *p)
 
 static void		funct_for_p2(t_p *p)
 {
+	while ((p->width - (p->precision > (int)p->len ?
+		(p->precision - (int)p->len) : 0) -
+		(int)p->len - 2) > 0 && !p->minus_on && p->zero_on)
+	{
+		p->buf[p->ret++] = 48;
+		p->width--;
+	}
 	while ((p->precision - (int)p->len - p->j++) > 0)
-			p->buf[p->ret++] = 48;
+		p->buf[p->ret++] = 48;
 	ft_memcpy(p->buf + p->ret, p->temp_s, p->len);
 	p->ret += p->len;
 	while ((p->width - (p->precision > (int)p->len ?
-		(p->precision - (int)p->len) : 0) -
-		(int)p->len - 2) > 0 && p->minus_on)
+		(p->precision - (int)p->len) : 0) - (int)p->len - 2) > 0 && p->minus_on)
 	{
 		p->buf[p->ret++] = 32;
 		p->width--;
@@ -73,8 +79,6 @@ static void		funct_for_p2(t_p *p)
 
 void			funct_for_p(t_p *p)
 {
-	p->temp_ul = va_arg(p->ap, unsigned long);
-	p->temp_s = ft_ulxtoa_base(p->temp_ul, 16);
 	if (p->prec_found && p->precision < 0)
 		p->width = 0;
 	if (p->temp_s[0] == 48 && !p->precision)
@@ -85,27 +89,20 @@ void			funct_for_p(t_p *p)
 		p->precision = 0;
 	}
 	if (p->width >= ft_abs(p->precision))
-		check_the_buf(p, ((p->len = ft_strlen(p->temp_s)) + 2 > (size_t)p->width ?
-			(p->len + 2) : p->width));
+		check_the_buf(p, ((p->len = ft_strlen(p->temp_s)) + 2 >
+			(size_t)p->width ? (p->len + 2) : p->width));
 	else
-		check_the_buf(p, ((p->len = ft_strlen(p->temp_s)) + 2 > (size_t)(ft_abs(p->precision) + 2) ?
+		check_the_buf(p, ((p->len = ft_strlen(p->temp_s)) + 2 >
+			(size_t)(ft_abs(p->precision) + 2) ?
 			(p->len + 2) : (ft_abs(p->precision) + 2)));
-	while ((p->width - (p->precision > (int)p->len ?
-		(p->precision - (int)p->len) : 0) -
-		(int)p->len - 2) > 0 && !p->minus_on && !p->zero_on)
+	while ((p->width - (p->precision > (int)p->len ? (p->precision -
+		(int)p->len) : 0) - (int)p->len - 2) > 0 && !p->minus_on && !p->zero_on)
 	{
 		p->buf[p->ret++] = 32;
 		p->width--;
 	}
 	p->buf[p->ret++] = '0';
 	p->buf[p->ret++] = 'x';
-	while ((p->width - (p->precision > (int)p->len ?
-		(p->precision - (int)p->len) : 0) -
-		(int)p->len - 2) > 0 && !p->minus_on && p->zero_on)
-	{
-		p->buf[p->ret++] = 48;
-		p->width--;
-	}
 	funct_for_p2(p);
 }
 

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF
+#ifndef FT_PRINTF_H
 
-# define FT_PRINTF
+# define FT_PRINTF_H
 
 # include <stdarg.h>
 # include "wchar.h"
@@ -28,9 +28,13 @@
 # include <inttypes.h>
 # include <stdint.h>
 
-# define A(x) x == 'c' || x == 'C' || x == 's' || x == 'S' || x == 'p' || x == 'd' || x == 'D' || x == 'i' || x == 'o' || x == 'O' || x == 'u' || x == 'U' || x == 'x' || x == 'X' || x == '%'
-# define B(x) x == '#' || x == '.' || x == '-' || x == '+' || x == 'l' || x == 'h' || x == 'j' || x == 'z' || x == ' ' || x == 39
+# define A(x) x == 'c' || x == 'C' || x == 's' || x == 'S' || x == 'p'
+# define A1(x) x == 'd' || x == 'D' || x == 'i' || x == 'o' || x == 'O'
+# define A2(x) x == 'u' || x == 'U' || x == 'x' || x == 'X' || x == '%'
+# define B(x) x == '#' || x == '.' || x == '-' || x == '+' || x == 'l'
+# define B1(x) x == 'h' || x == 'j' || x == 'z' || x == ' ' || x == 39
 # define C(x) x == 'C' || x == 'S' || x == 'c' || x == 's' || x == '%'
+# define D(x) (x >= 48 && x <= 57)
 
 typedef	struct	s_p
 {
@@ -125,5 +129,7 @@ void			prefunct_for_big_o(t_p *p);
 void			prefunct_for_o(t_p *p);
 void			prefunct_for_big_x(t_p *p);
 void			prefunct_for_x(t_p *p);
+void			minus_del(t_p *p);
+void			more_spec(t_p *p);
 
 #endif

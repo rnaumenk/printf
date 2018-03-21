@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prefunct2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rnaumenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/21 16:06:20 by rnaumenk          #+#    #+#             */
+/*   Updated: 2018/03/21 16:06:22 by rnaumenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ft_printf.h"
 
 static void		prefunct_for_u2(t_p *p)
@@ -15,7 +27,7 @@ static void		prefunct_for_u2(t_p *p)
 	else if (p->h_on > 1)
 	{
 		p->temp_ui = (unsigned char)va_arg(p->ap, unsigned int);
-		p->temp_s = ft_ulxtoa_base(p->temp_ui, 10);	
+		p->temp_s = ft_ulxtoa_base(p->temp_ui, 10);
 	}
 	else
 	{

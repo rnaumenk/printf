@@ -40,7 +40,8 @@ SRC		= 	check_the_buf.c \
 			look_for_specificators.c \
 			prefunct1.c \
 			prefunct2.c \
-			prefunct3.c
+			prefunct3.c \
+			additional.c
 OBJ		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 all: $(NAME)

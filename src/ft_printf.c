@@ -72,7 +72,6 @@ static void		move(t_p *p)
 			return ;
 		p->i++;
 	}
-	// printf("%zu\n", p->buf_size);
 }
 
 int				ft_printf(const char *format, ...)
@@ -80,8 +79,6 @@ int				ft_printf(const char *format, ...)
 	t_p			p;
 	int			i;
 
-	// if (!(p = (t_p*)malloc(sizeof(t_p))))
-	// 	return (-1);
 	if (!(p.buf = (char*)ft_memalloc(sizeof(char) *
 		((p.buf_size = 100) + 1))))
 		return (-1);
@@ -101,5 +98,4 @@ int				ft_printf(const char *format, ...)
 	i = (p.error ? -1 : (int)p.ret);
 	leaks_delete(&p);
 	return (i);
-	// return (p.error ? -1 : p.buf_size - 1);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   functs2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rnaumenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/21 16:06:46 by rnaumenk          #+#    #+#             */
+/*   Updated: 2018/03/21 16:06:47 by rnaumenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ft_printf.h"
 
 static void		cut(t_p *p)
@@ -43,6 +55,28 @@ static void		funct_for_s2(t_p *p)
 		ft_strdel(&p->temp_s);
 }
 
+static void		funct_for_s1(t_p *p)
+{
+	p->temp_s = ft_strdup("(null)");
+	if (p->precision >= 0 && 6 > (size_t)p->precision)
+		p->temp_s[p->precision] = 0;
+	check_the_buf(p, (p->len = ft_strlen(p->temp_s)) > (size_t)p->width ?
+		p->len : p->width);
+	while ((p->width - (int)p->len) > 0 && !p->minus_on)
+	{
+		p->buf[p->ret++] = p->zero_on ? 48 : 32;
+		p->width--;
+	}
+	ft_memcpy(p->buf + p->ret, p->temp_s, p->len);
+	p->ret += p->len;
+	while ((p->width - (int)p->len) > 0 && p->minus_on)
+	{
+		p->buf[p->ret++] = p->zero_on ? 48 : 32;
+		p->width--;
+	}
+	ft_strdel(&p->temp_s);
+}
+
 void			funct_for_s(t_p *p)
 {
 	p->temp_s = va_arg(p->ap, char*);
@@ -52,26 +86,7 @@ void			funct_for_s(t_p *p)
 		p->precision = 0;
 	}
 	if (!p->temp_s)
-	{
-		p->temp_s = ft_strdup("(null)");
-		if (p->precision >= 0 && 6 > (size_t)p->precision)
-			p->temp_s[p->precision] = 0;
-		check_the_buf(p, (p->len = ft_strlen(p->temp_s)) > (size_t)p->width ?
-			p->len : p->width);
-		while ((p->width - (int)p->len) > 0 && !p->minus_on)
-		{
-			p->buf[p->ret++] = p->zero_on ? 48 : 32;
-			p->width--;
-		}
-		ft_memcpy(p->buf + p->ret, p->temp_s, p->len);
-		p->ret += p->len;
-		while ((p->width - (int)p->len) > 0 && p->minus_on)
-		{
-			p->buf[p->ret++] = p->zero_on ? 48 : 32;
-			p->width--;
-		}
-		ft_strdel(&p->temp_s);
-	}
+		funct_for_s1(p);
 	else
 		funct_for_s2(p);
 }
